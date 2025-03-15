@@ -1,3 +1,5 @@
+"""The AsteroidField class."""
+
 import pygame
 import random
 from asteroid import Asteroid
@@ -5,6 +7,8 @@ from constants import *
 
 
 class AsteroidField(pygame.sprite.Sprite):
+    """Used for spawning the asteroids onto the screen."""
+
     edges = [
         [
             pygame.Vector2(1, 0),
@@ -33,10 +37,14 @@ class AsteroidField(pygame.sprite.Sprite):
         self.spawn_timer = 0.0
 
     def spawn(self, radius, position, velocity):
+        """Creates instances of Asteroid, also sets their velocity."""
+
         asteroid = Asteroid(position.x, position.y, radius)
         asteroid.velocity = velocity
 
     def update(self, dt):
+        """Spawns the asteroids at a random edge of the screen and updates their state."""
+
         self.spawn_timer += dt
         if self.spawn_timer > ASTEROID_SPAWN_RATE:
             self.spawn_timer = 0

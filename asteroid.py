@@ -1,8 +1,12 @@
+"""The Asteroid class."""
+
 import pygame
 from constants import *
 from circleshape import CircleShape
 
 class Asteroid(CircleShape):
+    """Creates an Asteroid instance."""
+
     def __init__(self, x, y, radius):
         super().__init__(x, y, radius)
 

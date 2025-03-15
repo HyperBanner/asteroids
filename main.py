@@ -1,3 +1,5 @@
+"""Simple Asteroids implementation using pygame."""
+
 import pygame
 from constants import *
 from player import Player
@@ -5,31 +7,55 @@ from asteroid import Asteroid
 from asteroidfield import AsteroidField
 
 def main():
+    """Main entrypoint into the program.
+       Initializes pygame, and sets up the the game loop."""
+
+    # startup pygame
     pygame.init()
+
+    # screensize
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    # framerate related
     clock = pygame.time.Clock()
     dt = 0
 
+    # groups
     updatables = pygame.sprite.Group()
     drawables = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
-
     Player.containers = (updatables, drawables)
     Asteroid.containers = (asteroids, updatables, drawables)
     AsteroidField.containers = updatables
 
-    Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    # create important instances
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     AsteroidField()
 
+    # game loop
     while True:
+        # if we trigger a quit event, close the program
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+
+        # background color
         screen.fill("black")
+
+        # update the state of game objects
         updatables.update(dt)
+
+        # check for collisions
+        for asteroid in asteroids:
+            if asteroid.collides(player):
+                print("Game Over!")
+                return
+
+        # draw game objects
         for drawable in drawables:
             drawable.draw(screen)
+
+        # redraw the screen and limit fps to 60
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
