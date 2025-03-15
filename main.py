@@ -9,9 +9,10 @@ from shot import Shot
 
 def main():
     """Main entrypoint into the program.
-       Initializes pygame, and sets up the the game loop."""
+       Initializes pygame and a few other important variables,
+       and sets up the the game loop."""
 
-    # startup pygame
+    # pygame
     pygame.init()
 
     # screensize
@@ -53,6 +54,10 @@ def main():
             if asteroid.collides(player):
                 print("Game Over!")
                 return
+            for shot in shots:
+                if asteroid.collides(shot):
+                    shot.kill()
+                    asteroid.kill()
 
         # draw game objects
         for drawable in drawables:
