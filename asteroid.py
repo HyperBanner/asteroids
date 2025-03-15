@@ -12,12 +12,18 @@ class Asteroid(CircleShape):
         super().__init__(x, y, radius)
 
     def draw(self, screen):
+        """Draws the asteroid."""
+
         pygame.draw.circle(screen, "white", self.position, self.radius, 2)
 
     def update(self, dt):
+        """Updates the position of the asteroid."""
+
         self.position += self.velocity * dt
 
     def split(self):
+        """Determines how splitting an asteroid should be done."""
+
         self.kill()
         if self.radius <= ASTEROID_MIN_RADIUS:
             return

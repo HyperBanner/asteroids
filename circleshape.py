@@ -27,6 +27,7 @@ class CircleShape(pygame.sprite.Sprite):
 
     def collides(self, circle):
         """Collision logic. This gets called in the game loop."""
+        
         if self.position.distance_to(circle.position) <= self.radius + circle.radius:
             return True
         return False

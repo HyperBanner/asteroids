@@ -31,23 +31,24 @@ class Player(CircleShape):
         pygame.draw.polygon(screen, "white", self.triangle(), 2)
 
     def rotate(self, dt):
-        """Rotate logic."""
+        """Rotates the player."""
 
         self.rotation += PLAYER_TURN_SPEED * dt
 
     def move(self, dt):
-        """Move logic."""
+        """Moves the player."""
 
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt
 
     def shoot(self):
+        """Shoot logic. This method gets called everytime the space key is hit."""
         self.shot = Shot(*self.position)
         self.shot.velocity = pygame.math.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
         self.timer = PLAYER_SHOOT_COOLDOWN
 
     def update(self, dt):
-        """Updates player position based on the controls."""
+        """Updates the player's actions based on the controls."""
 
         keys = pygame.key.get_pressed()
 
