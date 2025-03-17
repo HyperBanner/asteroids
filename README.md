@@ -10,5 +10,5 @@ Once again, thanks for [boot.dev](https://www.boot.dev) for making this guided p
 If you want to try it out (for some reason), ensure you have the latest python interpreter, and specifically have pygame 2.6.1 installed.
 There's a requirements.txt that you can install it from using pip:
 ```
-$ pip install requirements.txt
+$ pip install -r requirements.txt
 ```
